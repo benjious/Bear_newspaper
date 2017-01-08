@@ -7,11 +7,7 @@ package com.example.benjious.bear_newspaper.util;
 
 public class OkHttpUtils {
     public static final String TAG="OkHttpUtils";
-
-
     private static OkHttpUtils mInstance;
-
-
 
 
 }
