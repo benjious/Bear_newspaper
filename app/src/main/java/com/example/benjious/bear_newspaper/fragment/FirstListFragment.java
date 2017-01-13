@@ -7,8 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.benjious.bear_newspaper.R;
-import com.example.benjious.bear_newspaper.presenter.FirstFragmentImpl;
+import com.example.benjious.bear_newspaper.presenter.FirstListFragmentImpl;
 import com.example.benjious.bear_newspaper.presenter.FirstPresenter;
 import com.example.benjious.bear_newspaper.view.FirstView;
 
@@ -31,7 +30,7 @@ public class FirstListFragment extends Fragment implements FirstView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFirstPresenter = new FirstFragmentImpl(this);
+        mFirstPresenter = new FirstListFragmentImpl(this);
     }
 
     @Nullable
