@@ -1,0 +1,6 @@
+MainActivity　----　FirstFragment(里面放着4个类似Tab的FirstListFragment)
+              ----  FirstListFragmentImpl(实际是这个类在底层操作)
+
+              MVP:    V: 指的是FirstListFragment
+                      M: 数据模型类
+                      P: Interaction类

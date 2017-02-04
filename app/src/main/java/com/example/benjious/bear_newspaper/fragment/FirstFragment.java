@@ -19,39 +19,38 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static butterknife.ButterKnife.Finder.VIEW;
 
 /**
  * Created by Benjious on 2016/12/21.
  */
 
 public class FirstFragment extends Fragment {
+
+
+    public static final int ONE = 0;
+    public static final int TWO = 1;
+    public static final int THREE = 2;
     @Bind(R.id.main_tab_layout)
     TabLayout mTabLayout;
-    @Bind(R.id.viewPager)
-    ViewPager mViewPager;
-
-    public static final int ONE =0 ;
-    public static final int TWO =1 ;
-    public static final int THREE =2 ;
+    @Bind(R.id.viewpager)
+    ViewPager mViewpager;
 
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.first_fragment, null);
-        ButterKnife.bind(view);
+        View view = inflater.inflate(R.layout.first_fragment, null);
+        ButterKnife.bind(this, view);
         initView();
         return view;
     }
 
-    private void initView(){
-        setUpViewPager(mViewPager);
+    private void initView() {
+        setUpViewPager(mViewpager);
         mTabLayout.addTab(mTabLayout.newTab().setText("头条"));
         mTabLayout.addTab(mTabLayout.newTab().setText("NBA"));
         mTabLayout.addTab(mTabLayout.newTab().setText("汽车"));
 
-        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setupWithViewPager(mViewpager);
     }
 
     @Override
@@ -60,19 +59,19 @@ public class FirstFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    private void setUpViewPager(ViewPager upViewPager){
+    private void setUpViewPager(ViewPager upViewPager) {
         MyPagerAdapter myPagerAdapter = new MyPagerAdapter(getChildFragmentManager());
-        myPagerAdapter.addFragment(FirstListFragment.newInstance(ONE),"头条");
-        myPagerAdapter.addFragment(FirstListFragment.newInstance(TWO),"NBA");
-        myPagerAdapter.addFragment(FirstListFragment.newInstance(THREE),"汽车");
+        myPagerAdapter.addFragment(FirstListFragment.newInstance(ONE), "头条");
+        myPagerAdapter.addFragment(FirstListFragment.newInstance(TWO), "NBA");
+        myPagerAdapter.addFragment(FirstListFragment.newInstance(THREE), "汽车");
         upViewPager.setAdapter(myPagerAdapter);
     }
 
-    public static class  MyPagerAdapter extends FragmentPagerAdapter{
+    public static class MyPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragments = new ArrayList<>();
         private final List<String> mFragmentsTitle = new ArrayList<>();
 
-        public void addFragment(Fragment fragment,String title){
+        public void addFragment(Fragment fragment, String title) {
             mFragments.add(fragment);
             mFragmentsTitle.add(title);
         }

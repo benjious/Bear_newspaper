@@ -1,7 +1,5 @@
 package com.example.benjious.bear_newspaper.model;
 
-import com.example.benjious.bear_newspaper.presenter.FirstModeImpl;
-
 /**
  * Created by Benjious on 2016/12/31.
  */

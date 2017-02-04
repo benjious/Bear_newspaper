@@ -20,7 +20,7 @@
 
     <!--app:layout_behavior这个属性是和appbar上的空间有behavior关系-->
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+        android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
