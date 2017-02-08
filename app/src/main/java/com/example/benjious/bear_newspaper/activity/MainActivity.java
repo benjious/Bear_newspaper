@@ -1,6 +1,7 @@
 package com.example.benjious.bear_newspaper.activity;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import com.example.benjious.bear_newspaper.R;
@@ -43,6 +45,17 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
     @Override
     protected void findViewById() {
         ButterKnife.bind(this);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WindowManager.LayoutParams localLayoutParams = getWindow().getAttributes();
+            localLayoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | localLayoutParams.flags);
+        }
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+            //将侧边栏顶部延伸至status bar
+            mDrawerLayout.setFitsSystemWindows(true);
+            //将主页面顶部延伸至status bar;虽默认为false,但经测试,DrawerLayout需显示设置
+            mDrawerLayout.setClipToPadding(false);
+        }
         setSupportActionBar(mToolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout,mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.setDrawerListener(toggle);

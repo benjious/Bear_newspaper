@@ -55,6 +55,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      * 初始化Activity
      */
     private void initView() {
+
         loadViewLayout();
     }
 

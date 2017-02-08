@@ -24,12 +24,14 @@
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:background="?attr/colorPrimary"
         android:id="@+id/fa_firstlist"
         android:layout_width="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        app:layout_behavior="com.example.benjious.bear_newspaper.util.behavior.ScrollAwareFABBehavior"
+        android:background="?attr/colorPrimary"
         android:src="@mipmap/ic_top"/>
 
 </RelativeLayout>
