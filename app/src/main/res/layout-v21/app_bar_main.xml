@@ -11,12 +11,14 @@
     <!--elevation属性是material_design效果-->
     <!--scrollFlags属性是当滚动时会收起来-->
     <android.support.v7.widget.Toolbar
+        android:contentInsetStart="0dp"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="5dp"
         app:layout_scrollFlags="enterAlways|scroll"
+        app:titleTextAppearance="@style/Toolbar.Title"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
 </android.support.design.widget.AppBarLayout>

@@ -31,6 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_gravity="end|bottom"
         app:layout_behavior="com.example.benjious.bear_newspaper.util.behavior.ScrollAwareFABBehavior"
         android:background="?attr/colorPrimary"
         android:src="@mipmap/ic_top"/>
