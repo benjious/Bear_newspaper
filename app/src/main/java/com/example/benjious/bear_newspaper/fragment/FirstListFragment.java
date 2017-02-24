@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -45,7 +46,7 @@ public class FirstListFragment extends Fragment implements FirstView, SwipeRefre
 
     private int type = ONE;
     private int pageIndex = 0;
-    private ArrayList<DataBean> mDataBeen;
+    private ArrayList<DataBean> mData;
 
     private FirstPresenter mFirstPresenter;
     private LinearLayoutManager mLayoutManager;
@@ -85,6 +86,8 @@ public class FirstListFragment extends Fragment implements FirstView, SwipeRefre
             super.onScrollStateChanged(recyclerView, newState);
             //当没有滚动 并且 到达最后一个条目的时候
             if (newState == RecyclerView.SCROLL_STATE_IDLE && mLastVisibleItemPostion + 1 == mFirstAdapter.getItemCount() && mFirstAdapter.isShowFooter()) {
+                //  loadData(type,20)
+                //pageIndex : 20          20-40
                 mFirstPresenter.loadData(type, pageIndex + Urls.PAZE_SIZE);
             }
         }
@@ -95,6 +98,7 @@ public class FirstListFragment extends Fragment implements FirstView, SwipeRefre
     public static FirstListFragment newInstance(int type) {
         Bundle args = new Bundle(type);
         FirstListFragment fragment = new FirstListFragment();
+        args.putInt("type",type);
         fragment.setArguments(args);
         return fragment;
     }
@@ -110,7 +114,7 @@ public class FirstListFragment extends Fragment implements FirstView, SwipeRefre
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.firstlist_fragment, container, false);
+        View view = inflater.inflate(R.layout.firstlist_fragment, null);
         ButterKnife.bind(this, view);
         initView();
         onRefresh();
@@ -120,12 +124,15 @@ public class FirstListFragment extends Fragment implements FirstView, SwipeRefre
     private void initView() {
         mSwipeRefreshWidget.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark, R.color.colorAccent, R.color.colorAccent);
         mSwipeRefreshWidget.setOnRefreshListener(this);
-        mRecycleView.setHasFixedSize(true);
 
+        mRecycleView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecycleView.setLayoutManager(mLayoutManager);
+        mRecycleView.setItemAnimator(new DefaultItemAnimator());
+
         mFirstAdapter = new FirstAdapter(getActivity());
         mRecycleView.setAdapter(mFirstAdapter);
+
         mFirstAdapter.setOnItemClickListener(mOnItemClickListener);
         mRecycleView.addOnScrollListener(mOnScrollListener);
 
@@ -156,21 +163,25 @@ public class FirstListFragment extends Fragment implements FirstView, SwipeRefre
 
 
     @Override
-    public void addData(List list) {
-        if (mDataBeen == null) {
-            mDataBeen = new ArrayList<>();
+    public void addData(List<DataBean> mList) {
+        if (null == mData) {
+            mData = new ArrayList<>();
         }
 
         //把数据放进去
-        mDataBeen.addAll(list);
+        mData.addAll(mList);
         if (pageIndex == 0) {
-            mFirstAdapter.setData(list);
+            Log.d(TAG, "xyz  addData: ??????是否调用");
+            mFirstAdapter.setData(mData);
         } else {
-            if (list.size() == 0) {
+            if (mList.size() == 0|| mList==null) {
                 mFirstAdapter.isShowFooter(false);
             }
             mFirstAdapter.notifyDataSetChanged();
         }
+        // pageIndex : 0 -- 20  40-20
+        pageIndex+=Urls.PAZE_SIZE;
+        Log.d(TAG, "xyz  addData: =======addAll() ===");
     }
 
     @Override
@@ -188,8 +199,8 @@ public class FirstListFragment extends Fragment implements FirstView, SwipeRefre
     @Override
     public void onRefresh() {
         pageIndex = 0;
-        if (mDataBeen != null) {
-            mDataBeen.clear();
+        if (mData != null) {
+            mData.clear();
         }
         mFirstPresenter.loadData(type, pageIndex);
 

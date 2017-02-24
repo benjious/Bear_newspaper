@@ -1,7 +1,6 @@
 package com.example.benjious.bear_newspaper.adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +33,7 @@ public class FirstAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
 
     public FirstAdapter(Context context) {
-        mContext = context;
+        this.mContext = context;
     }
 
     public void setData(List<DataBean> dataBeen) {
@@ -83,7 +82,7 @@ public class FirstAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             return itemViewHolder;
         }else {
             View footer = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_first_footer,parent,false);
-            footer.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            footer.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             return new FooterViewHolder(footer);
         }
     }
@@ -122,6 +121,7 @@ public class FirstAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mTitle=(TextView)itemView.findViewById(R.id.item_head_title);
             mDesc=(TextView)itemView.findViewById(R.id.item_content_desc);
             mImageView=(ImageView) itemView.findViewById(R.id.item_image);
+            itemView.setOnClickListener(this);
 
         }
 

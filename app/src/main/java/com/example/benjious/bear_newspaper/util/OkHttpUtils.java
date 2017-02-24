@@ -25,12 +25,12 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class OkHttpUtils {
-    public static final String TAG="OkHttpUtils";
+    private static final String TAG="OkHttpUtils";
     private static OkHttpUtils mInstance;
     private OkHttpClient mOkHttpClient;
     private Handler mDelivery;
 
-    public OkHttpUtils() {
+    private OkHttpUtils() {
         mOkHttpClient=new OkHttpClient();
         mOkHttpClient.setConnectTimeout(10, TimeUnit.SECONDS);
         mOkHttpClient.setWriteTimeout(10, TimeUnit.SECONDS);

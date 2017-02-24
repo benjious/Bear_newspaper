@@ -36,6 +36,7 @@ public class FirstListFragmentImpl implements FirstPresenter,FirstModeImpl.Onloa
         mFirstView.showLoadFail();
     }
 
+
     //presenter接口的方法
     //不走请求图中的第一步
     @Override
